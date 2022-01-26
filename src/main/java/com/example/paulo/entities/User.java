@@ -1,4 +1,4 @@
- package com.example.paulo.entities;
+package com.example.paulo.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,11 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "td_user")
 public class User implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +25,11 @@ public class User implements Serializable {
 	private String email;
 	private String phone;
 	private String password;
-	
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();
-	
-	
+
 	public User() {
 	}
 
@@ -81,8 +81,7 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
+
 	public List<Order> getOrders() {
 		return orders;
 	}
@@ -111,7 +110,5 @@ public class User implements Serializable {
 			return false;
 		return true;
 	}
-
-
 
 }
